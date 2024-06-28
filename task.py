@@ -17,6 +17,10 @@ def on_key_event(event):
                 f.write("\n")
                 current_text += "\n"
                 check_completion()
+            elif key_name == "esc":
+                f.write("\ndone!")
+                current_text += "\ndone!"
+                check_completion()
             else:
                 f.write(key_name)
                 current_text += key_name
@@ -36,19 +40,19 @@ def update_display():
 def stop_logging():
     keyboard.unhook_all()
     print("Keylogger stopped.")
-    root.quit()  
-
+    root.quit() 
 
 root = tk.Tk()
-root.title("Keylogger GUI")
+root.title("Keylogger")
 
-text_widget = tk.Text(root, height=10, width=50)
+text_widget = tk.Text(root, height=10, width=50,bg="black",fg="white")
 text_widget.pack(padx=10, pady=10)
 
-stop_button = tk.Button(root, text="Stop Logging", command=stop_logging)
+stop_button = tk.Button(root, text="Stop Logging", command=stop_logging,bg="red",fg="white")
 stop_button.pack(pady=10)
 
-
 keyboard.on_press(on_key_event)
+
+print("Keylogger is running. Type 'end' to stop the logger.")
 
 root.mainloop()
